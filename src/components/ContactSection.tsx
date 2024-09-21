@@ -42,7 +42,7 @@ const ContactSection: React.FC = () => {
                 </a>
               </div>
             </div>
-            <p>Hello! Please hit me up about any of my projects or hobbies: pickleball, skiing, and cooking!</p>
+            <p>Hello! Please hit me up about any of my projects or hobbies: pickleball, ping pong, golf, and cooking!</p>
           </div>
         </div>
       </div>

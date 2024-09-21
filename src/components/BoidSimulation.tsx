@@ -143,7 +143,6 @@ const BoidSimulation: React.FC = () => {
         newBoid.x += newBoid.vx;
         newBoid.y += newBoid.vy;
 
-        // Draw glowing boid
         drawGlowingBoid(newBoid.x, newBoid.y, newBoid.hue);
 
         return newBoid;

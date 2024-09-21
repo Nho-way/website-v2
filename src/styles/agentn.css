@@ -1,0 +1,79 @@
+.agentn-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .main-box {
+    flex: 1;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(0deg, #ffffff, #efd9f3, #d1d6f5);
+    padding-top: 100px;
+  }
+  
+  .white-box {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 90%; 
+    max-width: 1200px;
+    height: 83vh; 
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .input-container {
+    position: relative;
+    margin-top: auto;
+  }
+  
+  .message-input {
+    width: 100%;
+    padding: 15px;
+    padding-right: 50px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    resize: none; 
+  }
+  
+  .send-button {
+    position: absolute;
+    right: 12px;
+    top: 45%; 
+    transform: translateY(-50%);
+    background-color: #e3f2fd;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: opacity 0.3s ease, background-color 0.3s ease;
+    opacity: 1;
+    padding: 0; 
+}
+  
+  .send-button:hover {
+    background-color: #bbdefb;
+  }
+  
+  .arrow-icon {
+    width: 15px;
+    height: 15px;
+    display: block;
+    object-fit: contain;
+  }
+
+  .send-button.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }

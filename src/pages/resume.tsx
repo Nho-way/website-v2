@@ -67,6 +67,53 @@ const Resume: React.FC = () => {
             </ul>
           </div>
         </div>
+        <h1 className="resume-title">Projects</h1>
+        <div className="resume-experience-item">
+          <div className="resume-date">2024</div>
+          <div className="resume-details">
+            <h2 className="resume-job-title">Personal Website</h2>
+            <ul className="resume-job-description">
+              <li>Rag</li>
+              <li>Distribute Computing</li>
+            </ul>
+          </div>
+        </div>
+        <div className="resume-experience-item">
+          <div className="resume-date">2024</div>
+          <div className="resume-details">
+            <h2 className="resume-job-title">Nature Quest</h2>
+            <ul className="resume-job-description">
+              <li>React Native</li>
+            </ul>
+          </div>
+        </div>
+        <div className="resume-experience-item">
+          <div className="resume-date">2023</div>
+          <div className="resume-details">
+            <h2 className="resume-job-title">VR World</h2>
+            <ul className="resume-job-description">
+              <li>Maveric Studios</li>
+            </ul>
+          </div>
+        </div>
+        <div className="resume-experience-item">
+          <div className="resume-date">2023</div>
+          <div className="resume-details">
+            <h2 className="resume-job-title">Sheepish</h2>
+            <ul className="resume-job-description">
+              <li>Cal Hacks</li>
+            </ul>
+          </div>
+        </div>
+        <div className="resume-experience-item">
+          <div className="resume-date">2023</div>
+          <div className="resume-details">
+            <h2 className="resume-job-title">Tarot Cards</h2>
+            <ul className="resume-job-description">
+              <li>Group Project</li>
+            </ul>
+          </div>
+        </div>
         <h1 className="resume-title">Education</h1>
         <div className="resume-experience-item">
           <div className="resume-date">2021-2025</div>
