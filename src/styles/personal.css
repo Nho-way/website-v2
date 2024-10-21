@@ -1,0 +1,113 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.personal-page {
+    position: relative;
+    height: 100vh;
+}
+
+.black-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.content-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.boid-container {
+    width: 100%;
+    height: 100%;
+}
+
+.profile {
+    background: rgba(54, 129, 215, 0.2);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 30px;
+    padding: 30px 40px;
+    max-height: 90%;
+    width: 100%;
+    overflow-y: auto;
+    box-sizing: border-box;
+    max-width: 1200px;
+}
+
+.profile-image {
+    padding-right: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-image img {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-info {
+    text-align: left;
+    color: white;
+}
+
+.profile-info p {
+    font-size: 1rem;
+}
+
+.caption {
+    display: relative;
+    color: white;
+    text-align: right;
+}
+
+.caption p {
+    font-size: .5rem;
+}
+
+@media (max-width: 1200px) {
+    .profile {
+        margin-top: 7vh;
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem;
+    }
+
+    .profile-image {
+        padding-right: 0;
+        padding-bottom: 2rem;
+    }
+
+    .profile-image img {
+        width: 200px;
+        height: 200px;
+    }
+
+    .profile-info {
+        text-align: center;
+    }
+
+    .profile-info p {
+        font-size: .75rem;
+    }
+}

@@ -23,7 +23,7 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     width: 90%; 
     max-width: 1200px;
-    height: 83vh; 
+    min-height: calc(100vh - 130px); 
     display: flex;
     flex-direction: column;
   }
@@ -41,6 +41,7 @@
     border-radius: 5px;
     font-size: 16px;
     resize: none; 
+    font-family: Arial, Helvetica, sans-serif;
   }
   
   .send-button {

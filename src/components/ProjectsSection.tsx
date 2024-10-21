@@ -1,67 +1,135 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Project } from '../types/projects';
 import '../styles/projectssection.css';
+import link from '../assets/link.svg';
+import youtube from '../assets/youtube.svg';
+import devpost from '../assets/devpost.svg';
+import github from '../assets/github.svg';
 
 interface ProjectsSectionProps {
-    projects: Project[];
-  }
+  projects: Project[];
+}
 
-  const ProjectsSection: React.FC<ProjectsSectionProps> = ({ projects }) => {
-    const projectsContainerRef = useRef<HTMLDivElement | null>(null);
-    const [showScrollButtons, setShowScrollButtons] = useState(false);
-  
-    useEffect(() => {
-      const checkScrollButtons = () => {
-        const container = projectsContainerRef.current;
-        if (container) {
-          setShowScrollButtons(container.scrollWidth > container.clientWidth);
+const ProjectsSection: React.FC<ProjectsSectionProps> = ({ projects }) => {
+  const projectsContainerRef = useRef<HTMLDivElement>(null);
+  const [expandedIndex, setExpandedIndex] = useState<number>(0);
+  const [showProject, setShowProject] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => setShowProject(true), 500);
+  }, []);
+
+  useEffect(() => {
+    const container = projectsContainerRef.current;
+    if (!container) return;
+
+    const handleScroll = () => {
+      const containerRect = container.getBoundingClientRect();
+      const containerCenter = containerRect.left + containerRect.width / 2;
+      let closestIndex = 0;
+      let minDistance = Infinity;
+
+      Array.from(container.children).forEach((child, index) => {
+        const childRect = child.getBoundingClientRect();
+        const childCenter = childRect.left + childRect.width / 2;
+        const distance = Math.abs(childCenter - containerCenter);
+
+        const maxScale = 1.5;
+        const scale = Math.max(1, maxScale - (distance / (containerRect.width / 2)) * (maxScale - 1));
+        
+        (child as HTMLElement).style.transform = `scale(${scale})`;
+
+        if (distance < minDistance) {
+          minDistance = distance;
+          closestIndex = index;
         }
-      };
-  
-      checkScrollButtons();
-      window.addEventListener('resize', checkScrollButtons);
-      return () => window.removeEventListener('resize', checkScrollButtons);
-    }, []);
-  
-    const scrollProjects = (direction: 'left' | 'right') => {
-      const container = projectsContainerRef.current;
-      if (container) {
-        const scrollAmount = 300; // Width of one project
-        container.scrollBy({
-          left: direction === 'left' ? -scrollAmount : scrollAmount,
-          behavior: 'smooth'
-        });
-      }
+      });
+
+      setExpandedIndex(closestIndex);
     };
-  
+
+    container.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleScroll);
+    handleScroll();
+
+    return () => {
+      container.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
+  }, [projects]);
+
+  useEffect(() => {
+    if (projectsContainerRef.current) {
+      const container = projectsContainerRef.current;
+      container.scrollLeft = 0;  
+    }
+  }, [projects]);
+
+  const renderLinkIcons = (project: Project) => {
     return (
-      <div className="white-section">
-        <div className="section-title-container">
-          <h2 className="section-title">Past Projects</h2>
-        </div>
-        <div className="projects-scroll-container">
-          <div className="projects-container" ref={projectsContainerRef}>
-            {projects.map((project, index) => (
-              <a key={index} href={project.href} target="_blank" rel="noopener noreferrer" className="project" style={{backgroundImage: `url(${project.imageUrl})`}}>
-                <div className="project-overlay">
-                  <h3>{project.title}</h3>
-                  <p className="project-description">{project.description}</p>
-                </div>
-                {project.icon && (
-                  <img src={project.icon} alt={`${project.title} icon`} className={`project-icon ${project.iconClass}`} />
-                )}
-              </a>
-            ))}
-          </div>
-          {showScrollButtons && (
-            <>
-              <button className="scroll-button left" onClick={() => scrollProjects('left')}>&lt;</button>
-              <button className="scroll-button right" onClick={() => scrollProjects('right')}>&gt;</button>
-            </>
-          )}
-        </div>
+      <div className="project-links">
+        {project.website && (
+          <a href={project.website} target="_blank" rel="noopener noreferrer">
+            <img src={link} alt="Website" className="link-icon" />
+          </a>
+        )}
+        {project.youtube && (
+          <a href={project.youtube} target="_blank" rel="noopener noreferrer">
+            <img src={youtube} alt="YouTube" className="link-icon" />
+          </a>
+        )}
+        {project.devpost && (
+          <a href={project.devpost} target="_blank" rel="noopener noreferrer">
+            <img src={devpost} alt="Devpost" className="link-icon" />
+          </a>
+        )}
+        {project.github && (
+          <a href={project.github} target="_blank" rel="noopener noreferrer">
+            <img src={github} alt="GitHub" className="link-icon" />
+          </a>
+        )}
       </div>
     );
   };
-  
-  export default ProjectsSection;
+
+  return (
+    <div className={`projects-section ${showProject ? 'fade-in' : ''}`}>
+      <div className="projects-scroll-container">
+        <div className="projects-container" ref={projectsContainerRef}>
+          {projects.map((project, index) => (
+            <div
+              key={index}
+              className={`project ${expandedIndex === index ? 'expanded' : ''} ${project.phone ? 'phone' : ''}`}
+            >
+              {expandedIndex === index ? (
+                <video
+                src={project.videoUrl}
+                autoPlay
+                loop
+                muted
+                className="project-video"
+              />
+              ) : (
+                <div
+                  className="project-image"
+                  style={{ backgroundImage: `url(${project.imageUrl})` }}
+                />
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+      {expandedIndex !== null && (
+        <div className="expanded-project-info">
+          <div className="project-title-container">
+            <h3>{projects[expandedIndex].title}</h3>
+            {renderLinkIcons(projects[expandedIndex])}
+          </div>
+          <p>{projects[expandedIndex].description}</p>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default ProjectsSection;

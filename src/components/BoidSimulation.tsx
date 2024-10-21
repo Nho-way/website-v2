@@ -15,13 +15,13 @@ const BoidSimulation: React.FC = () => {
   const animationFrameRef = useRef<number>();
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
-  const numBoids = 20;
+  const numBoids = 50;
   const visualRange = 25;
   const centeringFactor = 0.005;
   const avoidFactor = 0.05;
   const matchingFactor = 0.05;
-  const maxSpeed = 4;
-  const minSpeed = 3;
+  const maxSpeed = 5;
+  const minSpeed = 4;
   const edgeFactor = 0.5;
   const margin = 50;
 
@@ -77,10 +77,10 @@ const BoidSimulation: React.FC = () => {
     };
 
     const keepWithinBounds = (boid: Boid) => {
-      if (boid.x < -margin) boid.vx += edgeFactor;
-      if (boid.x > dimensions.width + margin) boid.vx -= edgeFactor;
-      if (boid.y < -margin) boid.vy += edgeFactor;
-      if (boid.y > dimensions.height + margin) boid.vy -= edgeFactor;
+      if (boid.x < -margin + 100) boid.vx += edgeFactor;
+      if (boid.x > dimensions.width + margin - 100) boid.vx -= edgeFactor;
+      if (boid.y < -margin + 100) boid.vy += edgeFactor;
+      if (boid.y > dimensions.height + margin - 100) boid.vy -= edgeFactor;
     };
 
     const animate = () => {
