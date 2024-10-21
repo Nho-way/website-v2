@@ -9,7 +9,7 @@ import sheepish from './assets/sheepish.png';
 import sheepishvid from './assets/Sheepish.mp4';
 import tarot from './assets/tarot.png';
 import futurenow from './assets/future_now.mp4';
-import vrimage from './assets/VRWorld.png';
+import vrimage from './assets/vrworld.png';
 import vrvideo from './assets/vrworld.mp4';
 
 import './App.css';
