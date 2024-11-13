@@ -43,7 +43,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ projects }) => {
         });
 
         setSelectedIndex(closestIndex);
-      }, 50); // Small delay to prevent rapid updates
+      }, 20); 
     };
 
     container.addEventListener('scroll', handleScroll);
@@ -76,10 +76,9 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ projects }) => {
         behavior: 'smooth'
       });
 
-      // Reset the scrolling flag after animation
       setTimeout(() => {
         isScrollingRef.current = false;
-      }, 500); // Match this with your scroll animation duration
+      }, 500); 
     }
   };
 
@@ -122,6 +121,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ projects }) => {
                   autoPlay
                   loop
                   muted
+                  playsInline
                   className="project-video"
                 />
               ) : (
