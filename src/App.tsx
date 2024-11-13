@@ -70,7 +70,7 @@ function App() {
         <div className="about-me">
           <h2>About Me</h2>
           <h3><span className="emphasis">I love building things. </span>  
-          I'm passionate about technology solving problems with sustainable 
+          I'm passionate about technology and solving problems with sustainable 
           solutions. I previously interned at Amazon Web Services, where I
           helped build new customer-facing features and am currently a 
           undergraduate researcher at the Scripps Institute of Oceanography.</h3>
