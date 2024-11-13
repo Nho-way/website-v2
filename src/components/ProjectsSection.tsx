@@ -12,40 +12,38 @@ interface ProjectsSectionProps {
 
 const ProjectsSection: React.FC<ProjectsSectionProps> = ({ projects }) => {
   const projectsContainerRef = useRef<HTMLDivElement>(null);
-  const [expandedIndex, setExpandedIndex] = useState<number>(0);
-  const [showProject, setShowProject] = useState(false);
-
-  useEffect(() => {
-    setTimeout(() => setShowProject(true), 500);
-  }, []);
+  const [selectedIndex, setSelectedIndex] = useState<number>(0);
+  const isScrollingRef = useRef(false);
 
   useEffect(() => {
     const container = projectsContainerRef.current;
     if (!container) return;
 
+    let scrollTimeout: NodeJS.Timeout;
+
     const handleScroll = () => {
-      const containerRect = container.getBoundingClientRect();
-      const containerCenter = containerRect.left + containerRect.width / 2;
-      let closestIndex = 0;
-      let minDistance = Infinity;
+      if (isScrollingRef.current) return;
 
-      Array.from(container.children).forEach((child, index) => {
-        const childRect = child.getBoundingClientRect();
-        const childCenter = childRect.left + childRect.width / 2;
-        const distance = Math.abs(childCenter - containerCenter);
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        const containerRect = container.getBoundingClientRect();
+        const containerCenter = containerRect.left + containerRect.width / 2;
+        let closestIndex = 0;
+        let minDistance = Infinity;
 
-        const maxScale = 1.5;
-        const scale = Math.max(1, maxScale - (distance / (containerRect.width / 2)) * (maxScale - 1));
-        
-        (child as HTMLElement).style.transform = `scale(${scale})`;
+        Array.from(container.children).forEach((child, index) => {
+          const childRect = child.getBoundingClientRect();
+          const childCenter = childRect.left + childRect.width / 2;
+          const distance = Math.abs(childCenter - containerCenter);
 
-        if (distance < minDistance) {
-          minDistance = distance;
-          closestIndex = index;
-        }
-      });
+          if (distance < minDistance) {
+            minDistance = distance;
+            closestIndex = index;
+          }
+        });
 
-      setExpandedIndex(closestIndex);
+        setSelectedIndex(closestIndex);
+      }, 50); // Small delay to prevent rapid updates
     };
 
     container.addEventListener('scroll', handleScroll);
@@ -55,15 +53,35 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ projects }) => {
     return () => {
       container.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleScroll);
+      clearTimeout(scrollTimeout);
     };
   }, [projects]);
 
-  useEffect(() => {
-    if (projectsContainerRef.current) {
-      const container = projectsContainerRef.current;
-      container.scrollLeft = 0;  
+  const scrollToProject = (index: number) => {
+    const container = projectsContainerRef.current;
+    if (!container) return;
+
+    isScrollingRef.current = true;
+    setSelectedIndex(index);
+
+    const children = Array.from(container.children);
+    if (children[index]) {
+      const child = children[index];
+      const childRect = child.getBoundingClientRect();
+      const containerRect = container.getBoundingClientRect();
+      const scrollLeft = container.scrollLeft + childRect.left - containerRect.left - (containerRect.width - childRect.width) / 2;
+      
+      container.scrollTo({
+        left: scrollLeft,
+        behavior: 'smooth'
+      });
+
+      // Reset the scrolling flag after animation
+      setTimeout(() => {
+        isScrollingRef.current = false;
+      }, 500); // Match this with your scroll animation duration
     }
-  }, [projects]);
+  };
 
   const renderLinkIcons = (project: Project) => {
     return (
@@ -93,22 +111,19 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ projects }) => {
   };
 
   return (
-    <div className={`projects-section ${showProject ? 'fade-in' : ''}`}>
+    <div className="projects-section">
       <div className="projects-scroll-container">
         <div className="projects-container" ref={projectsContainerRef}>
           {projects.map((project, index) => (
-            <div
-              key={index}
-              className={`project ${expandedIndex === index ? 'expanded' : ''} ${project.phone ? 'phone' : ''}`}
-            >
-              {expandedIndex === index ? (
+            <div key={index} className="project">
+              {selectedIndex === index ? (
                 <video
-                src={project.videoUrl}
-                autoPlay
-                loop
-                muted
-                className="project-video"
-              />
+                  src={project.videoUrl}
+                  autoPlay
+                  loop
+                  muted
+                  className="project-video"
+                />
               ) : (
                 <div
                   className="project-image"
@@ -119,13 +134,23 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ projects }) => {
           ))}
         </div>
       </div>
-      {expandedIndex !== null && (
+      {selectedIndex !== null && (
         <div className="expanded-project-info">
-          <div className="project-title-container">
-            <h3>{projects[expandedIndex].title}</h3>
-            {renderLinkIcons(projects[expandedIndex])}
-          </div>
-          <p>{projects[expandedIndex].description}</p>
+           <div className="project-titles">
+          {projects.map((project, index) => (
+            <button
+              key={index}
+              onClick={() => scrollToProject(index)}
+              className={`project-title ${selectedIndex === index ? 'active' : ''}`}
+            >
+              {project.title}
+            </button>
+          ))}
+        </div>
+        <div className="project-description">
+          {renderLinkIcons(projects[selectedIndex])}
+          <p>{projects[selectedIndex].description}</p>
+        </div>
         </div>
       )}
     </div>
