@@ -206,7 +206,7 @@
 @media (max-width: 768px) {  
 
   .projects-container {
-    padding-left: calc(50% - 175px);
+    padding-left: calc(50% - 100px);
     padding-right: calc(50% - 175px);
   } 
 
