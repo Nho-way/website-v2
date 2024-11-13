@@ -206,13 +206,13 @@
 @media (max-width: 768px) {  
 
   .projects-container {
-    padding-left: calc(50% - 250px);
-    padding-right: calc(50% - 250px);
+    padding-left: calc(50% - 200px);
+    padding-right: calc(50% - 200px);
   } 
 
   .project {
-    width: 300px;
-    height: 185px;
+    width: 350px;
+    height: 220px;
     margin-right: 130px;
   }
 
@@ -225,7 +225,7 @@
   }
 
   .expanded-project-info {
-    margin-top: -300px;
+    margin-top: -600px;
     width: 350px;
   }
 
