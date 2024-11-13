@@ -54,7 +54,7 @@ const BoidSimulation: React.FC = () => {
         canvasRef.current.width = containerWidth;
         canvasRef.current.height = containerHeight;
         if (containerWidth < 768) {
-          setNumBoids(100);
+          setNumBoids(70);
           setMaxSpeed(100);
           setMinSpeed(50);
           setMargin(50);
