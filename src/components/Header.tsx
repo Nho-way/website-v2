@@ -1,12 +1,7 @@
 import React from 'react';
 import '../styles/header.css';
-import resume from '../assets/resume.pdf'
 
 const Header: React.FC = () => {
-    const handleResumeClick = () => {
-      window.open(resume, '_blank', 'noopener,noreferrer');
-    };
-
     return (
       <div className="header">
         <div className="header-content">
