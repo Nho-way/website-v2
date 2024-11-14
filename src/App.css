@@ -144,6 +144,12 @@ h3 {
 }
 
 @media (max-width: 768px) {
+  .intro-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 66.67%;
+  }
+
   h2 {
       font-size: 1.7rem;
   }
@@ -164,17 +170,18 @@ h3 {
     padding: 0rem 3rem;
   }
 
+  .contact-buttons {
+    margin-top:2rem;
+  }
+
   .contact-button svg {
     width: 20px;
     height: 20px;
-    position: relative;
-    z-index: 1;
   }
   
   .contact-button.mail-icon svg {
     width: 25px;
     height: 25px;
-    scale: 1.05;
   }
 }
 
