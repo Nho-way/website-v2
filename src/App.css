@@ -163,6 +163,19 @@ h3 {
   .projects {
     padding: 0rem 3rem;
   }
+
+  .contact-button svg {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .contact-button.mail-icon svg {
+    width: 25px;
+    height: 25px;
+    scale: 1.05;
+  }
 }
 
 
