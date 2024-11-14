@@ -77,6 +77,44 @@ h3 {
   font-weight: 100;
 }
 
+.contact-buttons {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  flex-wrap: wrap;
+  margin-top:3rem;
+}
+
+.contact-button {
+  color: white;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9em;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: visible;
+  padding-left:40px;
+  padding-right:40px;
+  width: 30px; 
+}
+
+.contact-button svg {
+  width: 25px;
+  height: 25px;
+  position: relative;
+  z-index: 1;
+}
+
+.contact-button.mail-icon svg {
+  width: 30px;
+  height: 30px;
+  scale: 1.05;
+}
+
 @keyframes gradientMove {
   0% {
     background-position: 0% 50%;
