@@ -83,6 +83,7 @@ h3 {
   width: 100%;
   flex-wrap: wrap;
   margin-top:3rem;
+  gap: 3rem;
 }
 
 .contact-button {
@@ -97,9 +98,7 @@ h3 {
   align-items: center;
   position: relative;
   overflow: visible;
-  padding-left:40px;
-  padding-right:40px;
-  width: 30px; 
+  padding: 0.5rem 1rem;
 }
 
 .contact-button svg {

@@ -81,10 +81,10 @@ function App() {
         </div>
         <ProjectsSection projects={projects} />
         <div className="contact">
-          <h2>Let's Get In Contact</h2>
+          <h2>Get In Contact</h2>
           <h3>
             I'm currently based in San Diego, California. Please feel free to 
-            reach out! Let's <span className="animated-name">solve</span> some problems together!
+            reach out. Let's <span className="animated-name">solve </span> problems together!
           </h3>
           <div className="contact-buttons">
             <a href="https://www.linkedin.com/in/nho-way" target="_blank" rel="noopener noreferrer" className="contact-button">
